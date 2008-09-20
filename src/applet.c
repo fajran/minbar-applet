@@ -9,6 +9,16 @@
 
 #include "prefs.h"
 
+void menu_item_set_label(GtkMenuItem *, const gchar *);
+void next_prayer(void);
+void update_date(void);
+gboolean update_data(gpointer);
+void update_remaining(void);
+void prefs_cb(BonoboUIComponent *, gpointer, const gchar *);
+void about_cb(BonoboUIComponent *, gpointer, const gchar *);
+gboolean on_menubar_pressed(GtkWidget *, GdkEventButton *, gpointer);
+
+
 GtkWidget *menu;
 GtkWidget *label_prayer_time[6];
 
@@ -41,7 +51,8 @@ menu_item_set_label(GtkMenuItem *menu_item, const gchar* label)
 }
 
 // Taken from minbar
-void next_prayer()
+void 
+next_prayer(void)
 {	
 	/* current time */
 	time_t result;
@@ -66,7 +77,8 @@ void next_prayer()
 }
 
 // Taken from minbar
-void update_date()
+void 
+update_date(void)
 {
 	GTimeVal * curtime 	= g_malloc(sizeof(GTimeVal));
 
@@ -85,7 +97,8 @@ void update_date()
 }
 
 // Taken and modified from minbar
-void update_remaining()
+void 
+update_remaining(void)
 {
 	/* converts times to minutes */
 	int next_minutes = ptList[next_prayer_id].minute + ptList[next_prayer_id].hour*60;
@@ -123,6 +136,8 @@ update_data(gpointer data)
 	next_prayer();
 	update_remaining();
 	menu_item_set_label(GTK_MENU_ITEM(menu), next_prayer_string);
+
+	return TRUE;
 }
 
 void
@@ -199,18 +214,6 @@ on_menubar_pressed(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
 	}
 
 	return FALSE;
-}
-
-void 
-on_menu_preferences_activated(GtkMenuItem *menuitem, gpointer user_data)
-{
-	// TODO: open preferences
-}
-
-void 
-on_menu_about_activated(GtkMenuItem *menuitem, gpointer user_data)
-{
-	// TODO: open about
 }
 
 static gboolean
