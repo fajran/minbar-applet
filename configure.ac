@@ -21,6 +21,7 @@ AC_SUBST(ITL_LIBS)
 
 AC_CONFIG_FILES([
 	Makefile
+	data/Makefile
 	src/Makefile
 ])
 
