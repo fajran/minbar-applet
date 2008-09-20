@@ -10,5 +10,5 @@ CLEANFILES = \
 	$(server_DATA)
 
 xmldir = $(datadir)/minbar-applet
-xmlDATA = minbar-applet.xml
+xml_DATA = minbar-applet.xml
 
