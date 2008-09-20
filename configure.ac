@@ -1,5 +1,5 @@
 
-AC_INIT([minbarapplet], [0.0.1], [fajran@gmail.com], [minbarapplet])
+AC_INIT([minbar-applet], [0.0.1], [fajran@gmail.com], [minbar-applet])
 
 AM_INIT_AUTOMAKE([1.9 foreign dist-bzip2 no-dist-gzip -Wall])
 
