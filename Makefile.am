@@ -1,8 +1,5 @@
 
 SUBDIRS = src
-bin_PROGRAMS = minbarapplet
-
-minbarapplet_SOURCES = applet.c prefs.h
 
 serverdir = $(libdir)/bonobo/servers
 server_in_files = minbar-applet.server.in
