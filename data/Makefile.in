@@ -46,9 +46,10 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(serverdir)"
+am__installdirs = "$(DESTDIR)$(serverdir)" "$(DESTDIR)$(xmldir)"
 serverDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(server_DATA)
+xmlDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(server_DATA) $(xml_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ACLOCAL_AMFLAGS = @ACLOCAL_AMFLAGS@
@@ -149,7 +150,7 @@ CLEANFILES = \
 	$(server_DATA)
 
 xmldir = $(datadir)/minbar-applet
-xmlDATA = minbar-applet.xml
+xml_DATA = minbar-applet.xml
 all: all-am
 
 .SUFFIXES:
@@ -199,6 +200,23 @@ uninstall-serverDATA:
 	  echo " rm -f '$(DESTDIR)$(serverdir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(serverdir)/$$f"; \
 	done
+install-xmlDATA: $(xml_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(xmldir)" || $(MKDIR_P) "$(DESTDIR)$(xmldir)"
+	@list='$(xml_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(xmlDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(xmldir)/$$f'"; \
+	  $(xmlDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(xmldir)/$$f"; \
+	done
+
+uninstall-xmlDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(xml_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(xmldir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(xmldir)/$$f"; \
+	done
 tags: TAGS
 TAGS:
 
@@ -236,7 +254,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(serverdir)"; do \
+	for dir in "$(DESTDIR)$(serverdir)" "$(DESTDIR)$(xmldir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -282,7 +300,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-serverDATA
+install-data-am: install-serverDATA install-xmlDATA
 
 install-dvi: install-dvi-am
 
@@ -316,7 +334,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-serverDATA
+uninstall-am: uninstall-serverDATA uninstall-xmlDATA
 
 .MAKE: install-am install-strip
 
@@ -326,10 +344,11 @@ uninstall-am: uninstall-serverDATA
 	install-dvi-am install-exec install-exec-am install-html \
 	install-html-am install-info install-info-am install-man \
 	install-pdf install-pdf-am install-ps install-ps-am \
-	install-serverDATA install-strip installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-generic pdf pdf-am ps ps-am uninstall \
-	uninstall-am uninstall-serverDATA
+	install-serverDATA install-strip install-xmlDATA installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
+	pdf-am ps ps-am uninstall uninstall-am uninstall-serverDATA \
+	uninstall-xmlDATA
 
 
 $(server_DATA): $(server_in_files)
