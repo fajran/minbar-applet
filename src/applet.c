@@ -9,16 +9,6 @@
 
 #include "prefs.h"
 
-#define VERSION "0.0.1~20080920"
-
-#ifndef _
-  #define _(x) x
-#endif
-
-#ifndef N_
-  #define N_(x) x
-#endif
-
 GtkWidget *menu;
 GtkWidget *label_prayer_time[6];
 
@@ -288,25 +278,7 @@ minbar_applet_fill (PanelApplet *applet,
     BONOBO_UI_VERB_END
   };
   
-	gchar *menu_xml = "<Root>"
-	"  <popups>"
-	"    <popup name=\"button3\">"
-	"      <menuitem"
-	"       name=\"Preferences Item\""
-	"       verb=\"MinbarPreferences\""
-	"       _label=\"_Preferences\""
-	"       pixtype=\"stock\""
-	"       pixname=\"gtk-properties\"/>"
-	"      <menuitem"
-	"       name=\"About Item\""
-	"       verb=\"MinbarAbout\""
-	"       _label=\"_About\""
-	"       pixtype=\"stock\""
-	"       pixname=\"gtk-about\"/>"
-	"    </popup>"
-	"  </popups>"
-	"</Root>";
-	panel_applet_setup_menu(applet, menu_xml, menu_verbs, NULL);
+	panel_applet_setup_menu_from_file(applet, DATADIR, "minbar-applet.xml", NULL, menu_verbs, NULL);
 
 	/*
 	 * gconf thingies
