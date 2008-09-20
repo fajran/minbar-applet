@@ -148,6 +148,8 @@ server_DATA = $(server_in_files:.server.in=.server)
 CLEANFILES = \
 	$(server_DATA)
 
+xmldir = $(datadir)/minbar-applet
+xmlDATA = minbar-applet.xml
 all: all-am
 
 .SUFFIXES:
