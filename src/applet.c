@@ -9,9 +9,6 @@
 
 #include "prefs.h"
 
-#ifndef DATADIR
-  #define DATADIR "/home/iang/project/minbar/dev/applet"
-#endif
 #define VERSION "0.0.1~20080920"
 
 #ifndef _
@@ -290,7 +287,26 @@ minbar_applet_fill (PanelApplet *applet,
     BONOBO_UI_VERB ("MinbarAbout", about_cb),
     BONOBO_UI_VERB_END
   };
-	panel_applet_setup_menu_from_file(applet, DATADIR, "applet-menu.xml", NULL, menu_verbs, NULL);
+  
+	gchar *menu_xml = "<Root>"
+	"  <popups>"
+	"    <popup name=\"button3\">"
+	"      <menuitem"
+	"       name=\"Preferences Item\""
+	"       verb=\"MinbarPreferences\""
+	"       _label=\"_Preferences\""
+	"       pixtype=\"stock\""
+	"       pixname=\"gtk-properties\"/>"
+	"      <menuitem"
+	"       name=\"About Item\""
+	"       verb=\"MinbarAbout\""
+	"       _label=\"_About\""
+	"       pixtype=\"stock\""
+	"       pixname=\"gtk-about\"/>"
+	"    </popup>"
+	"  </popups>"
+	"</Root>";
+	panel_applet_setup_menu(applet, menu_xml, menu_verbs, NULL);
 
 	/*
 	 * gconf thingies
