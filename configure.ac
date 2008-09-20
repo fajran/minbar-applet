@@ -13,7 +13,7 @@ GNOME_DEBUG_CHECK
 GNOME_COMPILE_WARNINGS([maximum])
 GNOME_MAINTAINER_MODE_DEFINES
 
-pkg_modules="gtk+-2.0 >= 2.10 gconf-2.0"
+pkg_modules="gtk+-2.0 >= 2.10 gconf-2.0 libpanelapplet-2.0"
 PKG_CHECK_MODULES(MINBARAPPLET, [$pkg_modules])
 
 AC_CHECK_HEADER(itl/prayer.h,ITL_LIBS=-litl,AC_MSG_ERROR("itl/prayer.h not found."))
