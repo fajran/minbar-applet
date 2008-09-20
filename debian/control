@@ -1,0 +1,13 @@
+Source: minbar-applet
+Section: misc
+Priority: extra
+Maintainer: Fajran Iman Rusadi <fajran@gmail.com>
+Build-Depends: cdbs, debhelper (>= 5), libgtk2.0-dev (>= 2.10), libitl-dev, libgconf2-dev, libpanel-applet2-dev
+Standards-Version: 3.7.3
+
+Package: minbar-applet
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, minbar
+Description: GNOME Applet for Minbar
+ This is a GNOME Applet for Minbar, a GNOME Islamic prayer times
+ application.
