@@ -19,5 +19,10 @@ PKG_CHECK_MODULES(MINBARAPPLET, [$pkg_modules])
 AC_CHECK_HEADER(itl/prayer.h,ITL_LIBS=-litl,AC_MSG_ERROR("itl/prayer.h not found."))
 AC_SUBST(ITL_LIBS)
 
+AC_CONFIG_FILES([
+	Makefile
+	src/Makefile
+])
+
 AC_OUTPUT
 
